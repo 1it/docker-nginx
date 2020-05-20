@@ -1,14 +1,14 @@
 # Nginx Docker image
+  
+Nginx Docker image with example configuration managed via environment variables.  
+*Testing only-usage*  
 
-Nginx Docker image with example configuration managed via environment variables.
-*Testing only-usage*
+### Current versions:  
+*Current tags:* [`latest`](https://github.com/1it/docker-nginx/blob/master/Dockerfile)  
+Based on `nginx:latest`.  
 
-### Current versions:
-*Current tags:* [`latest`](https://github.com/1it/docker-nginx/blob/master/Dockerfile)
-Based on `nginx:latest`.
-
-###Defaults
-Default `nginx.conf` parameters that can be changed within `environment`.
+### Defaults  
+Default `nginx.conf` parameters that can be changed within `environment`.  
 ```sh
 NGINX_USER=nginx
 NGINX_WORKER_PROCESSES=1
