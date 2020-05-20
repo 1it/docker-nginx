@@ -12,7 +12,7 @@ services:
       NGINX_REMOVE_DEFAULT_CONF: "True"
       NGINX_UPSTREAMS: |
         [test1]='"http-echo-test1:8080"
-                 "http-echo-test2:8181 weight=3"'
+                 "http-echo-test2:8181 weight=2"'
         [test2]='"http-echo-test2:8181 weight=1"'
       NGINX_SERVER: |
         [SERVER_NAME]='_'
@@ -30,8 +30,8 @@ services:
 
   http-echo-test1:
     image: hashicorp/http-echo:latest
-    command: -listen=:8080 -text="http echo test1"
+    command: -listen=:8080 -text='{"echo":"http echo test1"}'
 
   http-echo-test2:
     image: hashicorp/http-echo:latest
-    command: -listen=:8181 -text="http echo test2"
+    command: -listen=:8181 -text='{"echo":"http echo test2"}'
