@@ -64,3 +64,12 @@ NGINX_SERVER: |
   [SSL_CERTIFICATE]='/etc/ssl/cert.pem'
   [SSL_CERTIFICATE_KEY]='/etc/ssl/key.pem'
 ```
+
+### Try with docker-compose
+Check example [docker-compose.yml](https://github.com/1it/docker-nginx/blob/master/docker-compose.yml).
+
+```sh
+git clone https://github.com/1it/docker-nginx.git;
+cd docker-nginx/
+docker-compose up -d
+```
