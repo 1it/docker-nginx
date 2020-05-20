@@ -27,7 +27,6 @@ services:
                  [PROXY_PASS]=http://test2'
         [def]='[NAME]=/
                [ROOT]=/usr/share/nginx/html'
-    command: cat /etc/nginx/nginx.conf
 
   http-echo-test1:
     image: hashicorp/http-echo:latest
