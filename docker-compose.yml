@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+  nginx:
+    image: 01it/nginx:latest
+    ports:
+      - "80:80" 
+    environment:
+      NGINX_WORKER_PROCESSES: 2
+      NGINX_WORKER_RLIMIT_NOFILE: 2048
+      NGINX_WORKER_CONNECTIONS: 2048
+      NGINX_REMOVE_DEFAULT_CONF: "True"
+      NGINX_UPSTREAMS: |
+        [test1]='"http-echo-test1:8080"
+                 "http-echo-test2:8181 weight=3"'
+        [test2]='"http-echo-test2:8181 weight=1"'
+      NGINX_SERVER: |
+        [SERVER_NAME]='_'
+        [PORT]='80 default'
+        [SSL]='False'
+        [SSL_CERTIFICATE]=''
+        [SSL_CERTIFICATE_KEY]=''
+      NGINX_LOCATIONS: |
+        [test1]='[NAME]=/test1
+                 [PROXY_PASS]=http://test1'
+        [test2]='[NAME]=/test2
+                 [PROXY_PASS]=http://test2'
+        [def]='[NAME]=/
+               [ROOT]=/usr/share/nginx/html'
+    command: cat /etc/nginx/nginx.conf
+
+  http-echo-test1:
+    image: hashicorp/http-echo:latest
+    command: -listen=:8080 -text="http echo test1"
+
+  http-echo-test2:
+    image: hashicorp/http-echo:latest
+    command: -listen=:8181 -text="http echo test2"
